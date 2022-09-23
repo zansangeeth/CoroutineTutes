@@ -13,20 +13,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GlobalScope.launch(Dispatchers.IO){
-            Log.i(TAG, "starting coroutine thread as ${Thread.currentThread().name}")
-            val netCall = doNetworkCall()
-            withContext(Dispatchers.Main){
-                Log.i(TAG, "finishing coroutine thread as ${Thread.currentThread().name}")
-                tvText.text = netCall
-            }
+        Log.i(TAG, "before runBlocking ${Thread.currentThread().name}")
+        runBlocking {
+            Log.i(TAG, "start runBlocking ${Thread.currentThread().name}")
+            delay(5000)
+            Log.i(TAG, "end runBlocking ${Thread.currentThread().name}")
         }
+        Log.i(TAG, "after runBlocking ${Thread.currentThread().name}")
 
     }
 
-    suspend fun doNetworkCall() : String{
-        delay(3000)
-        return "network call 01"
-    }
 
 }

@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.coroutines.*
 
 private const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +17,11 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "before runBlocking ${Thread.currentThread().name}")
         runBlocking {
             Log.i(TAG, "start runBlocking ${Thread.currentThread().name}")
-            delay(5000)
+            launch {
+
+                delay(5000)
+
+            }
             Log.i(TAG, "end runBlocking ${Thread.currentThread().name}")
         }
         Log.i(TAG, "after runBlocking ${Thread.currentThread().name}")
